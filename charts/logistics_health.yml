@@ -1,6 +1,9 @@
 style:
   font:
     family: "system-ui"
+  title:
+    font:
+      family: "system-ui"
 extends: "paper"
 title: "Jaffle Logistics health"
 source: logistics
