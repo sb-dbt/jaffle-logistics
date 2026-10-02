@@ -53,7 +53,6 @@ charts:
     x: month
     y: sla_target
     title: "Jaffle Equipment SLA target %"
-    color: "month"
 
   support_ticket_trend:
     type: bar
