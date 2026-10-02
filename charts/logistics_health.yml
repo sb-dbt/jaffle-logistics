@@ -137,7 +137,7 @@ charts:
           single_series_palette: "category-6-tonal-blue.deep"
       marks:
         line:
-          connect: true
+          connect: false
 
   delivery_inflection_points_table:
     type: table
