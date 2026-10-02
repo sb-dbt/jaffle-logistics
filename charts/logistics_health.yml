@@ -1,4 +1,4 @@
-extends: "paper"
+extends: "stark"
 title: "Jaffle Logistics health"
 source: logistics
 
