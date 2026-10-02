@@ -131,6 +131,10 @@ charts:
     y: value
     color: metric
     title: "On-time delivery vs. SLA target"
+    style:
+      color:
+        categorical:
+          single_series_palette: "category-6-tonal-blue.deep"
 
   delivery_inflection_points_table:
     type: table
