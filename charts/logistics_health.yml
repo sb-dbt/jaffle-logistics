@@ -1,4 +1,4 @@
-extends: "neon"
+extends: "paper"
 title: "Jaffle Logistics health"
 source: logistics
 
