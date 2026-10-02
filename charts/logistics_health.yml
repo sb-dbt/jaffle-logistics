@@ -1,6 +1,6 @@
 style:
   font:
-    family: "serif"
+    family: "dbt Serif Oldstyle Proportional"
 extends: "paper"
 title: "Jaffle Logistics health"
 source: logistics
