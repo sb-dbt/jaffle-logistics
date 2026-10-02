@@ -135,9 +135,6 @@ charts:
       color:
         categorical:
           single_series_palette: "category-6-tonal-blue.deep"
-      marks:
-        point:
-          color: "#94001e"
 
   delivery_inflection_points_table:
     type: table
