@@ -135,7 +135,7 @@ charts:
       color:
         categorical:
           single_series_palette: "category-6-tonal-blue.deep"
-          palette: "dbt-creams"
+          palette: "dbt-div-blue-red"
       marks:
         line:
           connect: false
