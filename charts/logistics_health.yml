@@ -1,4 +1,4 @@
-extends: "stark"
+extends: "vivid"
 title: "Jaffle Logistics health"
 source: logistics
 
