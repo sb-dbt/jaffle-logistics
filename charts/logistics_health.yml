@@ -4,6 +4,7 @@ style:
   title:
     font:
       family: "system-ui"
+      color: "#494A4C"
 extends: "paper"
 title: "Jaffle Logistics health"
 source: logistics
