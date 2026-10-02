@@ -22,6 +22,55 @@ queries:
 
       order by month, metric
 
+  delivery_inflection_points:
+    sql: |
+      with annotated as (
+          select
+              ts,
+              citation_url,
+              score,
+              case
+                  when citation_url = 'jaffle_logistics://crm_note/CRM-9001'
+                      then 'Chicago winter storm hits service'
+                  when citation_url = 'jaffle_logistics://call_transcript/CT-99021'
+                      then 'Performance keeps sliding after storm recovery'
+                  when citation_url = 'jaffle_logistics://incident_report/IR-9003'
+                      then 'Recurring Columbus handling pattern confirmed'
+                  when citation_url = 'jaffle_logistics://call_transcript/CT-99022'
+                      then 'Root cause and remediation shared with customer'
+              end as inflection_point,
+              case
+                  when citation_url = 'jaffle_logistics://crm_note/CRM-9001'
+                      then 'The January Chicago storm delayed a large freight batch, drove ticket volume, and triggered an SLA credit plus a written recovery plan.'
+                  when citation_url = 'jaffle_logistics://call_transcript/CT-99021'
+                      then 'On-time performance and ticket volume worsened again after storm recovery, showing that a second cause remained unresolved.'
+                  when citation_url = 'jaffle_logistics://incident_report/IR-9003'
+                      then 'A third handling incident tied recurring damage and mispicks to Bay 3 at the Columbus hub; the bay was cordoned and an operating-procedure audit began.'
+                  when citation_url = 'jaffle_logistics://call_transcript/CT-99022'
+                      then 'The account team separated the one-time storm impact from the recurring Columbus handling pattern and explained the remediation to the customer.'
+              end as context
+          from SB_ANALYTICS.DBT_SBERG.SEARCH
+          where demo = 'jaffle_equipment_performance_issues_classified'
+            and citation_url in (
+                'jaffle_logistics://crm_note/CRM-9001',
+                'jaffle_logistics://call_transcript/CT-99021',
+                'jaffle_logistics://incident_report/IR-9003',
+                'jaffle_logistics://call_transcript/CT-99022'
+            )
+      )
+
+      select
+          ts as event_date,
+          inflection_point,
+          context,
+          citation_url
+      from annotated
+      qualify row_number() over (
+          partition by citation_url
+          order by score desc
+      ) = 1
+      order by event_date
+
   customer_burden:
     sql: |
       select
@@ -41,19 +90,6 @@ queries:
       where client_name = 'Jaffle Equipment'
 
       order by month, event_type
-
-  account_context:
-    sql: |
-      select
-          ts,
-          source_type,
-          classification,
-          round(score, 3) as relevance,
-          citation_url,
-          left(replace(text, chr(10), ' '), 500) as evidence
-      from SB_ANALYTICS.DBT_SBERG.SEARCH
-      where demo = 'jaffle_equipment_performance_issues_classified'
-      order by score desc
 
   incidents_by_type:
     sql: |
@@ -89,6 +125,11 @@ charts:
     color: metric
     title: "On-time delivery vs. SLA target"
 
+  delivery_inflection_points_table:
+    type: table
+    query: delivery_inflection_points
+    title: "Inflection points behind the delivery curve"
+
   customer_burden:
     type: bar
     query: customer_burden
@@ -96,11 +137,6 @@ charts:
     y: events
     color: event_type
     title: "Support tickets and incidents by month"
-
-  account_context_table:
-    type: table
-    query: account_context
-    title: "Why these metrics moved — ranked evidence"
 
   incident_mix:
     type: bar
@@ -119,13 +155,11 @@ rows:
   - title: "Jaffle Equipment delivery performance"
     rows:
       - delivery_performance
+      - delivery_inflection_points_table
   - title: "Customer and operational burden"
     cols:
       - customer_burden
       - incident_mix
-  - title: "Why these metrics moved"
-    rows:
-      - account_context_table
   - title: "Account comparison"
     rows:
       - account_kpis_table
