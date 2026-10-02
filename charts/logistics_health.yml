@@ -1,6 +1,6 @@
 style:
   font:
-    family: "dbt Sans Tabular"
+    family: "Noto Emoji"
 extends: "paper"
 title: "Jaffle Logistics health"
 source: logistics
