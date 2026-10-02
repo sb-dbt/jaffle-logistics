@@ -135,7 +135,7 @@ charts:
       color:
         categorical:
           single_series_palette: "category-6-tonal-blue.deep"
-          palette: "dbt-seq-teal"
+          palette: "editorial-10.deep"
       marks:
         line:
           connect: false
