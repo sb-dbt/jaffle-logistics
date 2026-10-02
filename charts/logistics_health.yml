@@ -1,3 +1,6 @@
+style:
+  font:
+    family: "dbt Sans Tabular"
 extends: "paper"
 title: "Jaffle Logistics health"
 source: logistics
