@@ -1,4 +1,4 @@
-extends: "vivid"
+extends: "neon"
 title: "Jaffle Logistics health"
 source: logistics
 
