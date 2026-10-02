@@ -135,7 +135,6 @@ charts:
       color:
         categorical:
           single_series_palette: "category-6-tonal-blue.deep"
-        static: "#e69812"
       marks:
         line:
           connect: false
