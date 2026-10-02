@@ -135,7 +135,7 @@ charts:
       color:
         categorical:
           single_series_palette: "category-6-tonal-blue.deep"
-          palette: "dbt-div-coolwarm-dark"
+          palette: "dbt-div-orange-teal"
       marks:
         line:
           connect: false
