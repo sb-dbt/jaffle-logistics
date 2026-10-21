@@ -1,3 +1,11 @@
+style:
+  font:
+    family: "system-ui"
+  title:
+    font:
+      family: "system-ui"
+      color: "#494A4C"
+extends: "paper"
 title: "Jaffle Logistics health"
 source: logistics
 
@@ -124,6 +132,13 @@ charts:
     y: value
     color: metric
     title: "On-time delivery vs. SLA target"
+    style:
+      color:
+        categorical:
+          single_series_palette: "category-6-tonal-blue.deep"
+      marks:
+        line:
+          connect: false
 
   delivery_inflection_points_table:
     type: table
